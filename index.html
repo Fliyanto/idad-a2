@@ -33,12 +33,28 @@
           <li>Click a floating instrument bubble to learn about it.</li>
           <li>A popup will show info and may play a short audio clip.</li>
           <li>Use the Sound button to mute/unmute.</li>
-          <li>Bottom-left: Master / Lobby / Instrument volume controls.</li>
+          <li>Bottom-left: Master / Instrument volume controls.</li>
+          <li>Look for the ℹ️ bubble for a quick project overview.</li>
         </ul>
       </aside>
 
       <!-- STAGE -->
       <main id="bubbleStage" class="stage" aria-label="Instrument bubbles">
+        <!-- INFO BUBBLE (new) -->
+        <button
+          class="bubble"
+          data-id="about"
+          aria-label="About Nada Nusantara"
+        >
+          <span
+            class="bubble-icon"
+            aria-hidden="true"
+            style="font-size: 2.2rem; line-height: 1"
+            >ℹ️</span
+          >
+        </button>
+
+        <!-- Existing instrument bubbles -->
         <button class="bubble" data-id="angklung" aria-label="Angklung">
           <img class="bubble-icon" src="images/angklung.png" alt="" />
         </button>
@@ -71,7 +87,7 @@
         Made for spatial UI exploration — Indonesian traditional instruments.
       </footer>
 
-      <!-- INSTRUMENT MODAL -->
+      <!-- INSTRUMENT MODAL (unchanged) -->
       <section id="instrumentModal" class="modal" hidden>
         <div class="modal-backdrop" data-close="true"></div>
         <article
@@ -117,6 +133,62 @@
         </article>
       </section>
 
+      <!-- ABOUT MODAL (new: text-only layout) -->
+      <section id="aboutModal" class="modal" hidden>
+        <div class="modal-backdrop" data-close="true"></div>
+        <article
+          class="modal-card"
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="aboutTitle"
+        >
+          <button id="aboutClose" class="modal-close" aria-label="Close">
+            ✕
+          </button>
+
+          <!-- Text-only body (no image column) -->
+          <div class="modal-body" style="padding-top: 2.2rem">
+            <h2
+              id="aboutTitle"
+              class="modal-title"
+              style="margin-bottom: 0.75rem"
+            >
+              🌊 About Nada Nusantara
+            </h2>
+
+            <p class="modal-desc" style="margin-bottom: 1rem">
+              <strong>Nada Nusantara</strong> (Melodies of the Archipelago) is
+              an interactive sound experience that brings Indonesia’s
+              traditional instruments into a digital space. It invites visitors
+              to listen, touch, and explore the rhythm of culture through
+              movement and sound.
+            </p>
+
+            <h3 style="font-size: 1.15rem; margin: 0.5rem 0 0.25rem">
+              🎵 How It Works
+            </h3>
+            <p class="modal-desc" style="margin-bottom: 1rem">
+              Each floating bubble represents an instrument. By clicking,
+              dragging, or adjusting the liquid-filled sliders, visitors can
+              create layers of sound that blend together naturally. The bubbles
+              move, collide, and respond to one another, reflecting the harmony
+              and diversity found across Indonesia’s musical traditions.
+            </p>
+
+            <h3 style="font-size: 1.15rem; margin: 0.5rem 0 0.25rem">
+              💭 The Idea Behind It
+            </h3>
+            <p class="modal-desc">
+              This project reimagines cultural instruments for a new generation.
+              It transforms sound into an experience that feels both modern and
+              rooted in tradition. Nada Nusantara celebrates the living rhythm
+              of Indonesian music, showing how culture can evolve while keeping
+              its spirit alive.
+            </p>
+          </div>
+        </article>
+      </section>
+
       <!-- FIRST-VISIT AUDIO NOTICE -->
       <div
         id="audioNotice"
@@ -147,82 +219,15 @@
         </div>
       </div>
 
-      <!-- BOTTOM-LEFT VOLUME CLUSTER -->
+      <!-- BOTTOM-LEFT VOLUME CLUSTER (unchanged markup) -->
       <aside class="volume-cluster" aria-label="Volume controls">
         <!-- Master -->
         <div class="vol-control" data-kind="master">
-          <button
-            id="volMasterBtn"
-            class="vol-orb"
-            aria-controls="volMasterTube"
-            aria-expanded="false"
-            aria-label="Master volume"
-          >
+          <button id="volMasterBtn" class="vol-orb" aria-label="Master volume">
             <span class="vol-liquid" aria-hidden="true"></span>
             <span class="vol-icon" aria-hidden="true">🎚</span>
           </button>
           <div class="vol-label">Master</div>
-
-          <div id="volMasterTube" class="vol-tube" hidden>
-            <div
-              class="tube-track"
-              role="slider"
-              tabindex="0"
-              aria-label="Master volume"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              aria-valuenow="100"
-              data-kind="master"
-            >
-              <div class="tube-fill"></div>
-              <div class="tube-handle" aria-hidden="true"></div>
-              <ol class="tube-ticks" aria-hidden="true">
-                <li data-v="0">0</li>
-                <li data-v="25">25</li>
-                <li data-v="50">50</li>
-                <li data-v="75">75</li>
-                <li data-v="100">100</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!-- Lobby -->
-        <div class="vol-control" data-kind="lobby">
-          <button
-            id="volLobbyBtn"
-            class="vol-orb"
-            aria-controls="volLobbyTube"
-            aria-expanded="false"
-            aria-label="Lobby music volume"
-          >
-            <span class="vol-liquid" aria-hidden="true"></span>
-            <span class="vol-icon" aria-hidden="true">🎵</span>
-          </button>
-          <div class="vol-label">Lobby</div>
-
-          <div id="volLobbyTube" class="vol-tube" hidden>
-            <div
-              class="tube-track"
-              role="slider"
-              tabindex="0"
-              aria-label="Lobby music volume"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              aria-valuenow="75"
-              data-kind="lobby"
-            >
-              <div class="tube-fill"></div>
-              <div class="tube-handle" aria-hidden="true"></div>
-              <ol class="tube-ticks" aria-hidden="true">
-                <li data-v="0">0</li>
-                <li data-v="25">25</li>
-                <li data-v="50">50</li>
-                <li data-v="75">75</li>
-                <li data-v="100">100</li>
-              </ol>
-            </div>
-          </div>
         </div>
 
         <!-- Instrument -->
@@ -230,42 +235,18 @@
           <button
             id="volInstrBtn"
             class="vol-orb"
-            aria-controls="volInstrTube"
-            aria-expanded="false"
             aria-label="Instrument audio volume"
           >
             <span class="vol-liquid" aria-hidden="true"></span>
             <span class="vol-icon" aria-hidden="true">🎶</span>
           </button>
-          <div class="vol-label">Instrument</div>
-
-          <div id="volInstrTube" class="vol-tube" hidden>
-            <div
-              class="tube-track"
-              role="slider"
-              tabindex="0"
-              aria-label="Instrument audio volume"
-              aria-valuemin="0"
-              aria-valuemax="100"
-              aria-valuenow="100"
-              data-kind="instrument"
-            >
-              <div class="tube-fill"></div>
-              <div class="tube-handle" aria-hidden="true"></div>
-              <ol class="tube-ticks" aria-hidden="true">
-                <li data-v="0">0</li>
-                <li data-v="25">25</li>
-                <li data-v="50">50</li>
-                <li data-v="75">75</li>
-                <li data-v="100">100</li>
-              </ol>
-            </div>
-          </div>
+          <div class="vol-label">Bubbles</div>
         </div>
       </aside>
 
       <!-- AUDIO TAGS -->
       <audio id="player" preload="auto" crossorigin="anonymous"></audio>
+      <!-- Removed lobby element usage in JS; keeping here does no harm -->
       <audio
         id="lobby"
         src="audio/lobbyMusic.mp3"
